@@ -49,6 +49,7 @@ public class MainActivity
     private int listName = DutyDataSource.ACTIVE_AGENDA;
     private String listCaption = "Повестка";
 
+    //test for github
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
