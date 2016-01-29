@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <!-- Colors for view\edit activity layout for different item state-->
+    <color name="duty_active">#0000a0</color>
+    <color name="duty_arhive">#008080</color>
+    <color name="duty_trash">#808080</color>
+
+    <!-- Colors for item  layout for different item state-->
+    <color name="cardview_simple">#ffffff</color>
+    <color name="cardview_before_today">#ffb0b0</color>
+    <color name="cardview_today">#a0ffa0</color>
+    <color name="cardview_tomorrow">#a0a0ff</color>
+    <color name="cardview_after_tomorow">#b0b0b0</color>
+
+</resources>

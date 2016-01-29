@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/list_item_card_view"
+    android:layout_gravity="center"
+    android:minHeight="42dp">
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/list_item_card_view_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/list_item_card_view_what"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical|start"
+        android:hint = "list_item_card_view_what"
+        android:textStyle="bold"
+        android:padding="3dp"
+        />
+    <TextView
+        android:id="@+id/list_item_card_view_who"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:layout_below="@id/list_item_card_view_what"
+        android:layout_alignParentLeft="true"
+        android:layout_toLeftOf="@+id/list_item_card_view_when"
+        android:layout_alignParentStart="true"
+        android:layout_toStartOf="@+id/list_item_card_view_when"
+        android:padding="3dp"
+        />
+    <TextView
+        android:id="@+id/list_item_card_view_when"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:layout_below="@id/list_item_card_view_what"
+        android:layout_alignParentRight="true"
+        android:padding="3dp"
+        />
+
+</RelativeLayout>
+</android.support.v7.widget.CardView>
+
+

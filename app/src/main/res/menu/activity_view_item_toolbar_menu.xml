@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/activity_view_item_menu_to_active"
+        android:title="Восстановить"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/activity_view_item_menu_to_arhive"
+        android:title="В архив"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/activity_view_item_menu_to_trash"
+        android:title="В корзину"
+        app:showAsAction="never"/>
+
+</menu>
