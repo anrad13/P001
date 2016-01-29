@@ -20,9 +20,6 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import ru.anrad.p001.core.Duty;
 import ru.anrad.p001.core.DutyDataSource;
 import ru.anrad.p001.core.RVAdapter;
@@ -48,8 +45,6 @@ public class MainActivity
     private DutyDataSource ds;
     private int listName = DutyDataSource.ACTIVE_AGENDA;
     private String listCaption = "Повестка";
-
-    //test for github
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
