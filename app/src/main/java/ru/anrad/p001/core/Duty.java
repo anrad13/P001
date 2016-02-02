@@ -83,7 +83,7 @@ public class Duty {
             note = "";
         }
         else {
-            note = s;
+            note = s.trim();
         }
     }
     public void setActive() {

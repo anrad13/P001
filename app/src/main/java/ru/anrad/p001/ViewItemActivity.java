@@ -181,9 +181,10 @@ public class ViewItemActivity extends AppCompatActivity
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
+        //
         if (id == android.R.id.home) {
             if (isUpdated) {
-                Log.v("MyApp:ViewItemActivity", "onOptionsItemSelected:android.R.id.home && isUpdated");
+                //Log.v("MyApp:ViewItemActivity", "onOptionsItemSelected:android.R.id.home && isUpdated");
                 setResult(RESULT_OK);
             }
             else {
@@ -204,16 +205,16 @@ public class ViewItemActivity extends AppCompatActivity
             Log.v("MyApp:ViewItemActivity", "activity_view_item_menu_to_arhive");
             duty.setArhive();
             DutyDataSource.getInstance(getApplicationContext()).updateItem(duty);
-            setDuty();
-            isUpdated = true;
+            setResult(RESULT_OK);
+            finish();
             return true;
         }
         if (id == R.id.activity_view_item_menu_to_trash) {
             Log.v("MyApp:ViewItemActivity", "activity_view_item_menu_to_trash");
             duty.setTrash();
             DutyDataSource.getInstance(getApplicationContext()).updateItem(duty);
-            setDuty();
-            isUpdated = true;
+            setResult(RESULT_OK);
+            finish();
             return true;
         }
         return super.onOptionsItemSelected(item);

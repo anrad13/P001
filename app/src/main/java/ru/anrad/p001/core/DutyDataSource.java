@@ -203,7 +203,7 @@ public class DutyDataSource {
         timepoint.set(Calendar.MINUTE, 0);
         timepoint.set(Calendar.SECOND, 0);
         timepoint.set(Calendar.MILLISECOND, 0);
-        timepoint.add(Calendar.DATE, TRASH_DELAY_DAY);
+        timepoint.add(Calendar.DATE, -TRASH_DELAY_DAY);
 
         ArrayList<Duty> in = getTrashItemsList();
 

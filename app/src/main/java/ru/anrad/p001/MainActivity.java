@@ -151,10 +151,6 @@ public class MainActivity
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        //if (data == null) {return;}
-        //String who = data.getStringExtra("who");
-        //String what = data.getStringExtra("what");
-        Log.v("MyApp:MainActivity", "onActivityResult");
         if (requestCode == REQUEST_CODE_NEWITEM && resultCode == RESULT_OK) {
             setItemsList(DutyDataSource.ACTIVE_AGENDA);
         }
@@ -184,10 +180,7 @@ public class MainActivity
         toolbar.setTitle(listCaption);
         adapter.updateItems(ds.getItemsList(listName));
         if (adapter.getItemCount() == 0) {
-            Snackbar.make(findViewById(R.id.recyclerView), "Список пуст", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-        } else {
-            Snackbar.make(findViewById(R.id.recyclerView), "Список обновлен", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-        }
+            Snackbar.make(findViewById(R.id.recyclerView), "Список пуст", Snackbar.LENGTH_LONG).setAction("Action", null).show(); }
     }
     private String getListCaption(int _listName) {
         switch (_listName) {

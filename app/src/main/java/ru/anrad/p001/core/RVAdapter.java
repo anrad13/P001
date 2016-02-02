@@ -81,7 +81,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ViewHolder>{
 
         viewHolder.itemLayout.setBackgroundColor(ContextCompat.getColor(viewHolder.itemView.getContext(), ItemColor.getColor(d)));
 
-        Log.v("RVAdapter", "onBindViewHolder: item = " + d.toString());
+        //Log.v("RVAdapter", "onBindViewHolder: item = " + d.toString());
         if (d.isWho()) {
             viewHolder.itemWho.setText(d.getWho());
             viewHolder.itemWho.setVisibility(View.VISIBLE);

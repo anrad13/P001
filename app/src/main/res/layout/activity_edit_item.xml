@@ -56,6 +56,7 @@
             android:layout_height="wrap_content">
             <TableRow>
                 <ImageView
+                    android:contentDescription="icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal|center_vertical"
@@ -72,6 +73,7 @@
             </TableRow>
             <TableRow>
                 <ImageView
+                    android:contentDescription="icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical|center_horizontal"
@@ -84,6 +86,21 @@
                     android:layout_margin="@dimen/text_margin"
                     android:layout_gravity="center_vertical"
                     android:hint="Укажите срок" />
+            </TableRow>
+            <TableRow>
+                <ImageView
+                    android:contentDescription="icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@android:drawable/ic_input_get"
+                    android:padding="6dp" />
+                <EditText
+                    android:id="@+id/activity_edit_item_note"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/text_margin"
+                    android:hint="" />
             </TableRow>
 
         </TableLayout>

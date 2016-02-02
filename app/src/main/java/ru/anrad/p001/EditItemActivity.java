@@ -28,6 +28,7 @@ public class EditItemActivity
     private EditText whatEditText;
     private EditText whoEditText;
     private TextView whenEditText;
+    private TextView noteEditText;
 
     private DatePickerDialog dialog;
 
@@ -70,10 +71,12 @@ public class EditItemActivity
         whatEditText = (EditText) findViewById(R.id.activity_edit_item_what);
         whoEditText = (EditText) findViewById(R.id.activity_edit_item_who);
         whenEditText = (TextView) findViewById(R.id.activity_edit_item_when);
+        noteEditText = (TextView) findViewById(R.id.activity_edit_item_note);
 
         whatEditText.setText(duty.getWhat());
         whoEditText.setText(duty.getWho());
         whenEditText.setText(WhenDateFormat.toString(duty.getWhen()));
+        noteEditText.setText(duty.getNote());
 
         dialog = new DatePickerDialog();
 
@@ -106,7 +109,7 @@ public class EditItemActivity
 
         if (id == R.id.activity_edit_item_menu_save) {
             if (whatEditText.getText().toString().trim().isEmpty()) {
-                Snackbar.make(getCurrentFocus(), "Пустое значение действия. Не могу сохранить", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                Snackbar.make(whatEditText, "Пустое значение действия. Не могу сохранить", Snackbar.LENGTH_LONG).setAction("Action", null).show();
                 return true;
             }
             else {
@@ -120,10 +123,12 @@ public class EditItemActivity
                 duty.setWho(whoEditText.getText().toString().trim());
             }
 
+            duty.setNote(noteEditText.getText().toString().trim());
+
             DutyDataSource ds = DutyDataSource.getInstance(getApplicationContext());
             ds.updateItem(duty);
 
-            Snackbar.make(getCurrentFocus(), "Обновлено", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+            //Snackbar.make(getCurrentFocus(), "Обновлено", Snackbar.LENGTH_LONG).setAction("Action", null).show();
             setResult(RESULT_OK, null);
             finish();
             return true;
