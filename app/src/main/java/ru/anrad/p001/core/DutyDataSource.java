@@ -81,7 +81,7 @@ public class DutyDataSource {
         if (d == null) { d = items.get(Duty.TRASH).get(uuid); }
         if (d == null) { d = getItemFromDatabase(uuid); }
 
-        Log.v("DutyDataSource", "getItem: uuid=" + uuid + ": item= " + d.toString());
+        //Log.v("DutyDataSource", "getItem: uuid=" + uuid + ": item= " + d.toString());
         return d;
     }
 
@@ -109,7 +109,7 @@ public class DutyDataSource {
         if (in.isEmpty()) { loadItemsFromDatabase(Duty.ACTIVE);}
         //
         ArrayList<Duty> out = new ArrayList<>();
-        Log.v("DutyDataSource", "getActiveItemsList: list: " + list);
+        //Log.v("DutyDataSource", "getActiveItemsList: list: " + list);
 
         for (Duty d : in.values()) {
             switch (list) {
@@ -249,16 +249,16 @@ public class DutyDataSource {
     private void putItemInDatabase(Duty duty) {
         ContentValues values = buildDutyContentValuesForDatabase(duty);
         db.insert(MySQLiteHelper.DUTY_TABLENAME, null, values);
-        Log.v(DutyDataSource.class.getName(), "Put duty in db:" + duty.toString());
+        //Log.v(DutyDataSource.class.getName(), "Put duty in db:" + duty.toString());
     }
     private void deleteItemFromDatabase(Duty duty) {
         db.delete(MySQLiteHelper.DUTY_TABLENAME, MySQLiteHelper.DUTY_UUID + " = ?", new String[]{duty.getUUID()});
-        Log.v(DutyDataSource.class.getName(), "Delete duty in db");
+        //Log.v(DutyDataSource.class.getName(), "Delete duty in db");
     }
     private void updateItemInDatabase(Duty duty) {
         ContentValues values = buildDutyContentValuesForDatabase(duty);
         db.update(MySQLiteHelper.DUTY_TABLENAME, values, MySQLiteHelper.DUTY_UUID + " = ?", new String[]{duty.getUUID()});
-        Log.v(DutyDataSource.class.getName(), "Update duty in db");
+        //Log.v(DutyDataSource.class.getName(), "Update duty in db");
     }
     private Duty getItemFromDatabase(String uuid) {
         Duty d = null;
@@ -276,13 +276,13 @@ public class DutyDataSource {
     private void loadItemsFromDatabase(String state) {
         HashMap<String,Duty> l = items.get(state);
         l.clear();
-        Log.v("DutyDataSource", "loadItemsFromDatabase: state: " + state);
+        //Log.v("DutyDataSource", "loadItemsFromDatabase: state: " + state);
         Cursor cursor = db.query(MySQLiteHelper.DUTY_TABLENAME, ALL_COLUMNS, MySQLiteHelper.DUTY_STATE + " = ?", new String[]{state}, null, null, null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             Duty d = cursorToDuty(cursor);
             l.put(d.getUUID(), d);
-            Log.v("DutyDataSource", "loadItemsFromDatabase: item: " + d.toString());
+            //Log.v("DutyDataSource", "loadItemsFromDatabase: item: " + d.toString());
             cursor.moveToNext();
         }
         cursor.close();

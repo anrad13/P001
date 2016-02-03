@@ -23,6 +23,8 @@ public class NewItemActivity
     EditText whatEditText;
     EditText whoEditText;
     EditText whenEditText;
+    EditText noteEditText;
+
 
     Date when;
     DatePickerDialog dialog;
@@ -59,6 +61,7 @@ public class NewItemActivity
         whatEditText = (EditText) findViewById(R.id.activity_new_item_what);
         whoEditText = (EditText) findViewById(R.id.activity_new_item_who);
         whenEditText = (EditText) findViewById(R.id.activity_new_item_when);
+        noteEditText = (EditText) findViewById(R.id.activity_new_item_note);
 
         dialog = new DatePickerDialog();
         when = null;
@@ -97,12 +100,14 @@ public class NewItemActivity
             }
             Duty duty = new Duty(what);
 
+            /*
             String who = whoEditText.getText().toString().trim();
             if (who.isEmpty()) {
                 who = null;
-            }
-            duty.setWho(who);
+            } */
+            duty.setWho(whoEditText.getText().toString().trim());
             duty.setWhen(when);
+            duty.setNote(noteEditText.getText().toString().trim());
 
             DutyDataSource ds = DutyDataSource.getInstance(getApplicationContext());
             ds.putItem(duty);
