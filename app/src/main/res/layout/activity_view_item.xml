@@ -97,7 +97,7 @@
                     android:autoLink="all"
                     android:singleLine="false"
                     android:drawableBottom="#000000"
-                    android:ems="10"
+                    android:ems="11"
                     />
             </TableRow>
             <TableRow>
