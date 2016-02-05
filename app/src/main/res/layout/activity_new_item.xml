@@ -41,7 +41,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Укажите действие (Обязательно)" />
+            android:hint="Укажите действие (Обязательно)"
+            android:inputType="textCapSentences"
+            />
         <EditText
             android:id="@+id/activity_new_item_who"
             android:layout_width="match_parent"
@@ -49,6 +51,7 @@
             android:ems="10"
             android:hint="Укажите ответственного если надо"
             android:maxLength="30"
+            android:inputType="textCapSentences"
             />
         <EditText
             android:id="@+id/activity_new_item_when"
@@ -64,6 +67,8 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Укажите дополнительные данные"
+            android:inputType="textCapSentences|textMultiLine"
+            android:textIsSelectable="true"
             />
 
 

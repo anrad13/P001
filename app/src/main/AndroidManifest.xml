@@ -30,8 +30,8 @@
         <activity
             android:name=".ViewItemActivity"
             android:label="@string/title_activity_view_item"
-            android:parentActivityName=".MainActivity"
             android:launchMode="singleTop"
+            android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -46,6 +46,16 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="ru.anrad.p001.ViewItemActivity" />
         </activity>
+
+        <receiver android:name=".NewDutyAppWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/new_duty_app_widget_info" />
+        </receiver>
     </application>
 
 </manifest>
