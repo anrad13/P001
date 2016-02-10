@@ -42,7 +42,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Укажите действие (Обязательно)"
-            android:inputType="textCapSentences"
+            android:inputType="textCapSentences|textMultiLine"
             />
         <EditText
             android:id="@+id/activity_new_item_who"

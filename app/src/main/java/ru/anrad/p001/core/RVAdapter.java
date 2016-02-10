@@ -7,6 +7,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.view.menu.MenuView;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -35,7 +36,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ViewHolder>{
 
         @Override
         public void onClick(View v) {
-            Snackbar.make( v, "кликнули!!!: " + record.toString(), Snackbar.LENGTH_LONG).setAction("Action", null).show();
+            //Snackbar.make( v, "кликнули!!!: " + record.toString(), Snackbar.LENGTH_LONG).setAction("Action", null).show();
             itemListener.onItemClick(record);
         }
 
@@ -44,12 +45,13 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ViewHolder>{
         }
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder {
         private RelativeLayout itemLayout;
         private TextView itemWhat;
         private TextView itemWho;
         private TextView itemWhen;
         private ItemClickListener itemClickListener;
+        private Duty duty;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -62,65 +64,80 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ViewHolder>{
             itemWhen = (TextView) itemView.findViewById(R.id.list_item_card_view_when);
         }
 
+        public Duty getDuty() {
+            return duty;
+        }
+
+        public void setDuty (@NonNull Duty d) {
+            duty = d;
+            //Log.v("RVAdapter", "onBindViewHolder: item = " + d.toString());
+            itemLayout.setBackgroundColor(ContextCompat.getColor(itemLayout.getContext(), ItemColor.getColor(d)));
+
+            if (d.isWho()) {
+                itemWho.setText(d.getWho());
+                itemWho.setVisibility(View.VISIBLE);
+            }
+            else {
+                itemWho.setVisibility(View.GONE);
+                //Log.v("RVAdapter", "onBindViewHolder: Who is gone");
+            }
+
+            Date date;
+            if (d.getState().equals(Duty.ACTIVE)) {
+                date = d.getWhen();
+            } else {
+                date = d.getTimestamp();
+            }
+
+            if (date != null) {
+                itemWhen.setText(WhenDateFormat.format(date));
+                itemWhen.setVisibility(View.VISIBLE);
+            }
+            else {
+                itemWhen.setVisibility(View.GONE);
+                //Log.v("RVAdapter", "onBindViewHolder: When is gone");
+            }
+
+            itemWhat.setText(d.getWhat());
+            if ( !d.isWho() && date==null) {
+                itemWhat.setMinLines(2);
+            }
+            else {
+                itemWhat.setMinLines(1);
+            }
+
+            itemClickListener.setRecord(d);
+        }
+
     }
 
     public RVAdapter(List<Duty> l, ItemListener il) {
         records = l;
         itemListener = il;
+        //
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.itemlist_cardview, viewGroup, false);
         return new ViewHolder(v);
+
     }
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
         Duty d = records.get(i);
+        viewHolder.setDuty(d);
 
-        viewHolder.itemLayout.setBackgroundColor(ContextCompat.getColor(viewHolder.itemView.getContext(), ItemColor.getColor(d)));
-
-        //Log.v("RVAdapter", "onBindViewHolder: item = " + d.toString());
-        if (d.isWho()) {
-            viewHolder.itemWho.setText(d.getWho());
-            viewHolder.itemWho.setVisibility(View.VISIBLE);
-        }
-        else {
-            viewHolder.itemWho.setVisibility(View.GONE);
-            //Log.v("RVAdapter", "onBindViewHolder: Who is gone");
-        }
-
-        Date date;
-        if (d.getState().equals(Duty.ACTIVE)) {
-            date = d.getWhen();
-        } else {
-            date = d.getTimestamp();
-        }
-
-        if (date != null) {
-            viewHolder.itemWhen.setText(WhenDateFormat.format(date));
-            viewHolder.itemWhen.setVisibility(View.VISIBLE);
-        }
-        else {
-            viewHolder.itemWhen.setVisibility(View.GONE);
-            //Log.v("RVAdapter", "onBindViewHolder: When is gone");
-        }
-
-        viewHolder.itemWhat.setText(d.getWhat());
-        if ( !d.isWho() && date==null) {
-            viewHolder.itemWhat.setMinLines(2);
-        }
-        else {
-            viewHolder.itemWhat.setMinLines(1);
-        }
-
-         viewHolder.itemClickListener.setRecord(d);
     }
 
     @Override
     public int getItemCount() {
         return records.size();
+    }
+
+    public Duty getItem(int itemId) {
+        return records.get(itemId);
     }
 
     public void updateItems (List<Duty> records) {

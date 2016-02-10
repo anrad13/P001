@@ -12,10 +12,6 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 2;
 
     public static final String DUTY_TABLENAME = "duty";
-    public static final String ARHIVE_TABLENAME = "arhive";
-    public static final String TRASH_TABLENAME = "trash";
-    public static final String ITEMS_TABLENAME = "items";
-
 
     public static final String DUTY_ID = "id";
     public static final String DUTY_UUID = "uuid";
@@ -58,9 +54,6 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         Log.v(MySQLiteHelper.class.getName()," Upgrading database from version " + oldVersion + " to " + newVersion + ", which will destroy all old data");
         db.execSQL("DROP TABLE IF EXISTS " + DUTY_TABLENAME);
-        //db.execSQL("DROP TABLE IF EXISTS " + ARHIVE_TABLENAME);
-        //db.execSQL("DROP TABLE IF EXISTS " + TRASH_TABLENAME);
-        //db.execSQL("DROP TABLE IF EXISTS " + ITEMS_TABLENAME);
         onCreate(db);
     }
 

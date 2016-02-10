@@ -12,9 +12,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.ArrayList;
-import java.util.UUID;
 
 public class DutyDataSource {
 
@@ -54,7 +52,6 @@ public class DutyDataSource {
     private DutyDataSource(Context context) {
         this.dbHelper = new MySQLiteHelper(context);
         this.open();
-
         items = initItems();
     }
 
@@ -100,7 +97,7 @@ public class DutyDataSource {
             case DutyDataSource.ARHIVE:
                 return getArhiveItemsList();
             default:
-                return new ArrayList<Duty>();
+                return new ArrayList<>();
         }
     }
 
@@ -171,19 +168,23 @@ public class DutyDataSource {
 
 
     public void putItem(Duty duty) {
-        items.get(Duty.ACTIVE).put(duty.getUUID(), duty);
         putItemInDatabase(duty);
+        if (!items.get(Duty.ACTIVE).isEmpty()) {
+            items.get(Duty.ACTIVE).put(duty.getUUID(), duty);
+        }
     }
 
     public void updateItem(Duty duty) {
         Duty dutySaved = getItemFromDatabase(duty.getUUID());
         if (dutySaved == null) return;
 
-        if (!dutySaved.getState().equals(duty.getState())) {
+        if ( ! dutySaved.getState().equals(duty.getState())) {
             if (items.get(dutySaved.getState()).containsKey(dutySaved.getUUID())) {
-                items.get(dutySaved.getState()).remove(dutySaved.getUUID());}
-            if (items.get(duty.getState()).containsKey(duty.getUUID())) {
-                items.get(duty.getState()).put(duty.getUUID(), duty);}
+                items.get(dutySaved.getState()).remove(dutySaved.getUUID());
+            }
+            if ( ! items.get(duty.getState()).isEmpty()) {
+                items.get(duty.getState()).put(duty.getUUID(), duty);
+            }
         }
 
         updateItemInDatabase(duty);

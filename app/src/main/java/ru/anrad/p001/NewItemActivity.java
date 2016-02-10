@@ -100,11 +100,6 @@ public class NewItemActivity
             }
             Duty duty = new Duty(what);
 
-            /*
-            String who = whoEditText.getText().toString().trim();
-            if (who.isEmpty()) {
-                who = null;
-            } */
             duty.setWho(whoEditText.getText().toString().trim());
             duty.setWhen(when);
             duty.setNote(noteEditText.getText().toString().trim());
@@ -112,10 +107,6 @@ public class NewItemActivity
             DutyDataSource ds = DutyDataSource.getInstance(getApplicationContext());
             ds.putItem(duty);
 
-            //Intent intent = new Intent();
-            //intent.putExtra("what", whatEditText.getText().toString());
-            //intent.putExtra("who", whoEditText.getText().toString());
-            //intent.put
             Snackbar.make(whatEditText, "Действие добавлено", Snackbar.LENGTH_LONG).setAction("Action", null).show();
             setResult(RESULT_OK, null);
             finish();

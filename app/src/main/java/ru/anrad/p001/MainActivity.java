@@ -15,6 +15,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.View;
 import android.view.Menu;
@@ -31,7 +32,7 @@ public class MainActivity
                     NavigationView.OnNavigationItemSelectedListener {
 
     public void onItemClick(Duty duty) {
-        Log.v("MainActivity", "On Click Item Duty: " + duty.toString());
+        //Log.v("MainActivity", "On Click Item Duty: " + duty.toString());
         Intent intent = new Intent(this, ViewItemActivity.class);
         intent.putExtra("UUID", duty.getUUID());
         startActivityForResult(intent, REQUEST_CODE_VIEWITEM);
@@ -49,7 +50,6 @@ public class MainActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //Log.v("MyApp:MainActivity", "onCreate");
         setContentView(R.layout.activity_main);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -85,13 +85,31 @@ public class MainActivity
         createItemsList(DutyDataSource.ACTIVE_AGENDA);
         //adapter = new RVAdapter(ds.getItemsList(listName), this);
 
-        RecyclerView recyclerView = (RecyclerView)findViewById(R.id.recyclerView);
+        final RecyclerView recyclerView = (RecyclerView)findViewById(R.id.recyclerView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         RecyclerView.ItemAnimator itemAnimator = new DefaultItemAnimator();
 
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(itemAnimator);
+
+        ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) { return false;}
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
+                RVAdapter.ViewHolder vh = (RVAdapter.ViewHolder) viewHolder;
+                Duty d = vh.getDuty();
+                d.setTrash();
+                DutyDataSource.getInstance(getApplicationContext()).updateItem(d);
+                updateItemsList();
+                Snackbar.make(findViewById(R.id.recyclerView), "Активность в корзине", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                Log.v("MainActivity", "Swipe Duty: " + d.toString());
+            }
+        };
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
+        itemTouchHelper.attachToRecyclerView(recyclerView);
+
     }
 
     @Override
